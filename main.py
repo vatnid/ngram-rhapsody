@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
-from collections import defaultdict, Counter
+from collections import defaultdict
 import math
 import numpy as np
+import sys
+from datetime import datetime
+
 
 def train(source, target):
 
@@ -32,7 +35,9 @@ def train(source, target):
         tri_probs[item] = tri_counts[item] / sum([tri_counts[x] for x in tri_counts if x[0:2] == item[0:2]])
         print(item, tri_probs[item])
 
-    with open((target), "w") as f:  # create a model using Knesser-Ney smoothing 
+    now = datetime.now()
+    date_time = now.strftime("%Y%m%d%H%M%S")
+    with open((f"{target}_{date_time}"), "w") as f:
         for item in tri_probs:
             f.write(f"{item}\t{tri_probs[item]}\n")
 
@@ -74,13 +79,36 @@ def export(lm_file):
     with open(lm_file) as f:
         raw = generate(read_lm(f), 5000).split("##")
         # write the output to a file
-        with open((lm_file + "_output.txt"), "w") as f:
+        now = datetime.now()
+        date_time = now.strftime("%Y%m%d%H%M%S")
+        with open((f"{lm_file}_output_{date_time}.txt"), "w") as f:
             for line in raw:
                 if line != "":
                     f.write(line+"\n")
 
-source = "script.txt"
-target = "rhapsody-lm"
 
-train(source, target)
-export(target)
+
+if len(sys.argv) < 2 or not (sys.argv[1] != "train" or sys.argv[1] != "generate"):
+    print("Usage: ", sys.argv[0], "[train|generate] [source file] ([target file])")
+    sys.exit(1)
+
+if sys.argv[1] == "train" and len(sys.argv) != 4:
+    print("Usage: ", sys.argv[0], "train [source file] [target file]")
+    sys.exit(1)
+
+if sys.argv[1] == "generate" and len(sys.argv) != 3:
+    print("Usage: ", sys.argv[0], "train [source file]")
+    sys.exit(1)
+
+procedure = sys.argv[1]
+source = sys.argv[2]
+if len(sys.argv) == 4:
+    target = sys.argv[3]
+
+#source = "script.txt"
+#target = "rhapsody-lm"
+
+if procedure == "train":
+    train(source, target)
+elif procedure == "generate":
+    export(source)
