@@ -23,7 +23,7 @@
 
 `python3 main.py train script.txt rhapsody-lm`
 
-`script.txt` 可以改做你想要嘅另一個 .txt file，呢個應該係未經處理嘅文稿，`rhapsody-lm` 係你想 train 咗出嚟個 model 嘅名
+`script.txt` 可以改做你想要嘅另一個 .txt file，呢個應該係未經處理嘅文稿，`rhapsody-lm` 係你想 train 咗出嚟個 model 嘅名。
 
 ### 生成語撚！
 
@@ -31,4 +31,4 @@
 
 `python3 main.py generate rhapsody-lm`
 
-同樣，可以將 `rhapsody-lm` 改成你想用嚟 gen 嘢嗰個 model
+同樣，可以將 `rhapsody-lm` 改成你想用嚟 gen 嘢嗰個 model 就可以喇！
