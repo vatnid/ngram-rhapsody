@@ -1,6 +1,6 @@
 # ngram-rhapsody 複製語撚
 
-用[〈絮言・狂想〉podcast](https://www.rhapsodyinlingo.com/jyut/收聽/) 嘅逐字稿訓練成嘅 trigram language model gen 出嚟嘅嘢，因爲講啲嘢好語言向，所以叫複製語撚（擺明個名係抄[複製陳雲](https://www.youtube.com/watch?v=m-kgJ00cl5o)）。
+用[〈絮言・狂想〉podcast](https://www.rhapsodyinlingo.com/jyut/收聽/) 嘅逐字稿（想要原稿可以[成爲會員](https://www.patreon.com/rhapsodyinlingo)）訓練成嘅 trigram language model gen 出嚟嘅嘢，因爲講啲嘢好語言向，所以叫複製語撚（擺明個名係抄[複製陳雲](https://www.youtube.com/watch?v=m-kgJ00cl5o)）。
 
 ## 運作原理
 
@@ -10,7 +10,7 @@
 
 呢個 model 係好簡單嘅 maximum likelihood estimation，即係純粹係計晒原稿裏面所有三個字元組合嘅數量，然後再除返總數。例如文中有 100 個 `ab`，有 90 個 `ab` 後面係 `c`，其餘 10 個 `ab` 後面係 `d`，噉 `abc` 同 `abd` 嘅機率就會係 0.9 同 0.1。
 
-所以佢只係識 gen 一啲佢已經見過嘅嘢，而且因爲 trigram model gen 每一個字元只會參考前兩個字元，所以出到嚟係會九唔搭八，要參考更長嘅 history 就要多啲 data 喇（）。
+所以佢只係識 gen 一啲佢已經見過嘅嘢，而且因爲 trigram model gen 每一個字元只會參考前兩個字元，所以出到嚟係會九唔搭八，要參考更長嘅 history 就要多啲 data 喇。
 
 ## 點用？
 如果你用 macOS/Linux，可以首先裝 Python 3，然後用 command line，去返 main.py 個路徑：
